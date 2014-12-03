@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Rookian.TNL.App_Start;
+using Rookian.TNL.Infrastructure;
 
 namespace Rookian.TNL
 {
@@ -16,6 +17,8 @@ namespace Rookian.TNL
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ViewEngines.Engines.Add(new FeatureViewLocationRazorViewEngine());
         }
 
         protected void Session_Start(object sender, EventArgs e)

@@ -6,7 +6,9 @@ namespace Rookian.TNL.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var model = new Features.Home.IndexViewModel();
+            model.Name = "Foo";
+            return View(model);
         }
     }
 }
