@@ -1,4 +1,7 @@
 ﻿@*@inherits System.Web.Mvc.WebViewPage<Rookian.TNL.Features.Home.IndexViewModel>*@
+@using Rookian.TNL.Infrastructure
 @model Rookian.TNL.Features.Home.IndexViewModel
 <h1>Home/Index</h1>
 <h2>@Model.Name</h2>
+
+@Html.FormBlock(x => x.Name)
