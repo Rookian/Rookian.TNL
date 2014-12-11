@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Rookian.TNL.Infrastructure
+namespace Rookian.TNL.Infrastructure.MVC
 {
     public class FeatureViewLocationRazorViewEngine : RazorViewEngine
     {
@@ -11,7 +11,7 @@ namespace Rookian.TNL.Infrastructure
             "~/Features/{1}/{0}.cshtml",
             "~/Features/{1}/{0}.vbhtml",
             "~/Features/Shared/{0}.cshtml",
-            "~/Features/Shared/{0}.vbhtml",
+            "~/Features/Shared/{0}.vbhtml"
             };
 
             MasterLocationFormats = ViewLocationFormats;
@@ -21,7 +21,7 @@ namespace Rookian.TNL.Infrastructure
             "~/Features/{1}/{0}.cshtml",
             "~/Features/{1}/{0}.vbhtml",
             "~/Features/Shared/{0}.cshtml",
-            "~/Features/Shared/{0}.vbhtml",
+            "~/Features/Shared/{0}.vbhtml"
             };
         }
     }

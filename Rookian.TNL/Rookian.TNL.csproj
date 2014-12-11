@@ -175,12 +175,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\EnumDropDownModifier.cs" />
-    <Compile Include="Infrastructure\FubuAspNetTagExtensions.cs" />
-    <Compile Include="Infrastructure\FeatureViewLocationRazorViewEngine.cs" />
-    <Compile Include="Infrastructure\FubuAspNetBlockExtensions.cs" />
-    <Compile Include="Infrastructure\OverrideHtmlConventions.cs" />
-    <Compile Include="Infrastructure\SpanValidatorBuilder.cs" />
+    <Compile Include="Infrastructure\FubuMVCTagHelper\EnumDropDownModifier.cs" />
+    <Compile Include="Infrastructure\FubuMVCTagHelper\FubuAspNetTagExtensions.cs" />
+    <Compile Include="Infrastructure\Handler\Mediator.cs" />
+    <Compile Include="Infrastructure\Handler\ICommandHandler.cs" />
+    <Compile Include="Infrastructure\Handler\IMediator.cs" />
+    <Compile Include="Infrastructure\Handler\IQuery.cs" />
+    <Compile Include="Infrastructure\Handler\IQueryHandler.cs" />
+    <Compile Include="Infrastructure\MVC\FeatureViewLocationRazorViewEngine.cs" />
+    <Compile Include="Infrastructure\FubuMVCTagHelper\FubuAspNetBlockExtensions.cs" />
+    <Compile Include="Infrastructure\FubuMVCTagHelper\OverrideHtmlConventions.cs" />
+    <Compile Include="Infrastructure\FubuMVCTagHelper\SpanValidatorBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -16,6 +16,8 @@ using FubuMVC.Core.UI.Security;
 using HtmlTags.Conventions;
 using Rookian.TNL.App_Start;
 using Rookian.TNL.Infrastructure;
+using Rookian.TNL.Infrastructure.FubuMVCTagHelper;
+using Rookian.TNL.Infrastructure.MVC;
 using SimpleInjector;
 using SimpleInjector.Extensions;
 using SimpleInjector.Integration.Web;
