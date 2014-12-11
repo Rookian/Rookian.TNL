@@ -177,7 +177,6 @@
     </Compile>
     <Compile Include="Infrastructure\Bootstrapping\Bootstrapper.cs" />
     <Compile Include="Infrastructure\Bootstrapping\ContainerExtensions.cs" />
-    <Compile Include="Infrastructure\FubuMVCTagHelper\ContainerExtensions.cs" />
     <Compile Include="Infrastructure\FubuMVCTagHelper\EnumDropDownModifier.cs" />
     <Compile Include="Infrastructure\FubuMVCTagHelper\FubuAspNetTagExtensions.cs" />
     <Compile Include="Infrastructure\Handler\Mediator.cs" />

@@ -11,8 +11,7 @@ namespace Rookian.TNL
             var bootstrapper = new Bootstrapper();
             bootstrapper
                 .BootMVC()
-                .BootDIContainer()
-                .ConfigureDependencyResolver();
+                .BootDIContainer();
         }
 
         protected void Session_Start(object sender, EventArgs e)

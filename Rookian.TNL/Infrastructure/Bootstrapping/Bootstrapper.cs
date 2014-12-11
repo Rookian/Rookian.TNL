@@ -2,7 +2,6 @@
 using System.Web.Optimization;
 using System.Web.Routing;
 using Rookian.TNL.App_Start;
-using Rookian.TNL.Infrastructure.FubuMVCTagHelper;
 using Rookian.TNL.Infrastructure.MVC;
 using SimpleInjector;
 
@@ -19,17 +18,17 @@ namespace Rookian.TNL.Infrastructure.Bootstrapping
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new FeatureViewLocationRazorViewEngine());
-
             
             return this;
         }
 
-
         public Container BootDIContainer()
         {
             var container = new Container();
+
             container.RegisterFubuMvcTagHelpers();
             container.RegisterMvcIntegratedFilterProvider();
+            container.ConfigureDependencyResolver();
 
             return container;
         }
