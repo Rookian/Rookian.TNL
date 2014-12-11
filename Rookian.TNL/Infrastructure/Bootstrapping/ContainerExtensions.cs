@@ -33,14 +33,15 @@ namespace Rookian.TNL.Infrastructure.Bootstrapping
             htmlConventionLibrary.Import(conventions.Library);
             container.RegisterSingle(() => htmlConventionLibrary);
 
-            container.Register<IValueSource, RequestPropertyValueSource>();
-            container.Register<ITagRequestActivator, ServiceLocatorTagRequestActivator>();
+            container.RegisterAll<IValueSource>(typeof(RequestPropertyValueSource));
+            container.RegisterAll<ITagRequestActivator>(typeof(ElementRequestActivator));
+
             container.RegisterPerWebRequest<HttpRequestBase>(container.GetInstance<HttpRequestWrapper>);
             container.RegisterPerWebRequest<HttpContextBase>(container.GetInstance<HttpContextWrapper>);
             container.RegisterPerWebRequest(() => HttpContext.Current.Request);
             container.RegisterPerWebRequest(() => HttpContext.Current);
             container.Register<ITypeResolverStrategy, TypeResolver.DefaultStrategy>();
-            container.Register<IElementNamingConvention, DotNotationElementNamingConvention>();
+            container.Register<IElementNamingConvention, AspNetMvcElementNamingConvention>();
             container.RegisterOpenGeneric(typeof(ITagGenerator<>), typeof(TagGenerator<>));
             container.RegisterOpenGeneric(typeof(IElementGenerator<>), typeof(ElementGenerator<>));
 

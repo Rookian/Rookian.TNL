@@ -31,14 +31,13 @@ namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
             divTag.AddClass("form-group");
             var labelTag = helper.Label(expression);
 
-            var name = ExpressionHelper.GetExpressionText(expression);
-            labelTag.Attr("for", name);
             labelModifier(labelTag);
             var inputBlockTag = helper.InputBlock(expression, inputModifier, validatorModifier);
-            inputBlockTag.Id(name);
+
             inputBlockModifier(inputBlockTag);
             divTag.Append(labelTag);
             divTag.Append(inputBlockTag);
+
             return divTag;
         }
         public static HtmlTag SubmitBlock(this HtmlHelper helper, string text = "Submit")

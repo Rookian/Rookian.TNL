@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using System.Web.UI.HtmlControls;
 using FubuCore.Reflection;
 using FubuMVC.Core.UI.Elements;
 using HtmlTags;
@@ -30,21 +31,21 @@ namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
         Expression<Func<T, object>> expression)
         where T : class
         {
-            var generator = GetGenerator<T>();
+            var generator = GetGenerator(helper);
             return generator.InputFor(expression, model: helper.ViewData.Model);
         }
         public static HtmlTag Display<T>(this HtmlHelper<T> helper,
         Expression<Func<T, object>> expression)
         where T : class
         {
-            var generator = GetGenerator<T>();
+            var generator = GetGenerator<T>(helper);
             return generator.DisplayFor(expression, model: helper.ViewData.Model);
         }
         public static HtmlTag Label<T>(this HtmlHelper<T> helper,
         Expression<Func<T, object>> expression)
         where T : class
         {
-            var generator = GetGenerator<T>();
+            var generator = GetGenerator<T>(helper);
             return generator.LabelFor(expression, model: helper.ViewData.Model);
         }
 
@@ -105,9 +106,11 @@ namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
         {
             return helper.ValidationSummary(message, new { @class = "text-danger" });
         }
-        private static IElementGenerator<T> GetGenerator<T>() where T : class
+        private static IElementGenerator<T> GetGenerator<T>(HtmlHelper<T> helper) where T : class
         {
             var generator = DependencyResolver.Current.GetService<IElementGenerator<T>>();
+            generator.Model = (helper.ViewData.Model);
+            //var generator = DependencyResolver.Current.GetService<IElementGenerator<T>>();
             return generator;
         }
     }
