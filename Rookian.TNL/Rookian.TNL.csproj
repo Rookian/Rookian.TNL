@@ -144,6 +144,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\Shared\Layout.cshtml" />
     <Content Include="Features\Web.config" />
+    <Content Include="Features\Account\LoginForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -170,7 +171,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Features\Account\LoginForm.cs" />
     <Compile Include="Features\Home\IndexViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

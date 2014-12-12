@@ -1,0 +1,8 @@
+﻿@using Rookian.TNL.Infrastructure.FubuMVCTagHelper
+@model Rookian.TNL.Features.Account.LoginForm
+           
+@using (Html.BeginForm())
+{
+    @Html.FormBlock(x => x.UserName)
+    @Html.FormBlock(x => x.Password)
+}
