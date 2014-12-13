@@ -1,4 +1,7 @@
-﻿using System.Web;
+﻿using System.Linq;
+using System.Reflection;
+using System.Web;
+using System.Web.Compilation;
 using System.Web.Mvc;
 using FubuCore;
 using FubuCore.Binding;
@@ -6,12 +9,14 @@ using FubuCore.Binding.InMemory;
 using FubuCore.Binding.Values;
 using FubuCore.Logging;
 using FubuMVC.Core.Http.AspNet;
+using FubuMVC.Core.Resources.Conneg;
 using FubuMVC.Core.Runtime;
 using FubuMVC.Core.UI;
 using FubuMVC.Core.UI.Elements;
 using FubuMVC.Core.UI.Security;
 using HtmlTags.Conventions;
 using Rookian.TNL.Infrastructure.FubuMVCTagHelper;
+using Rookian.TNL.Infrastructure.Handler;
 using SimpleInjector;
 using SimpleInjector.Extensions;
 using SimpleInjector.Integration.Web.Mvc;
@@ -57,6 +62,15 @@ namespace Rookian.TNL.Infrastructure.Bootstrapping
             container.Register<ILogger, Logger>();
             container.Register(() => new BindingRegistry());
             container.Register<IRequestData>(() => new RequestData());
+        }
+
+        public static void RegisterMediator(this Container container)
+        {
+            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().ToList();
+
+            container.Register<IMediator, Mediator>();
+            container.RegisterManyForOpenGeneric(typeof(ICommandHandler<>), assemblies);
+            container.RegisterManyForOpenGeneric(typeof(IQueryHandler<,>), assemblies);
         }
     }
 }

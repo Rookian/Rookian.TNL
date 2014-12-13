@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using FubuMVC.Core.UI.Elements;
 using HtmlTags;
 using HtmlTags.Conventions;
 using Microsoft.Web.Mvc;
+using Rookian.TNL.Infrastructure.Handler;
 
 namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
 {
@@ -39,32 +41,33 @@ namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
 
         public static HtmlTag Label<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
         {
-            var generator = GetGenerator<T>(helper);
+            var generator = GetGenerator(helper);
             return generator.LabelFor(expression, model: helper.ViewData.Model);
         }
 
-        //public static HtmlTag QueryDropDown<T, TItem, TQuery>(this HtmlHelper<T> htmlHelper, Expression<Func<T, TItem>> expression, TQuery query, Func<TItem, string> displaySelector, Func<TItem, object> valueSelector)
-        //where TQuery : IRequest<IEnumerable<TItem>>
-        //{
-        //    var expressionText = ExpressionHelper.GetExpressionText(expression);
-        //    var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
-        //    var selectedItem = (TItem)metadata.Model;
-        //    var mediator = DependencyResolver.Current.GetService<IMediator>();
-        //    var items = mediator.Send(query);
-        //    var select = new SelectTag(t =>
-        //    {
-        //        t.Option("", string.Empty);
-        //        foreach (var item in items)
-        //        {
-        //            var htmlTag = t.Option(displaySelector(item), valueSelector(item));
-        //            if (item.Equals(selectedItem) == false) continue;
-        //            htmlTag.Attr("selected");
-        //        }
-        //        t.Id(expressionText);
-        //        t.Attr("name", expressionText);
-        //    });
-        //    return select;
-        //}
+        public static HtmlTag QueryDropDown<T, TItem, TQuery>(this HtmlHelper<T> htmlHelper, Expression<Func<T, object>> expression, TQuery query, Func<TItem, string> displaySelector, Func<TItem, object> valueSelector) where TQuery : IQuery<IEnumerable<TItem>>
+        {
+            var expressionText = ExpressionHelper.GetExpressionText(expression);
+            var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+            var selectedItem = metadata.Model;
+            var mediator = DependencyResolver.Current.GetService<IMediator>();
+            var items = mediator.Request(query);
+            var select = new SelectTag(t =>
+            {
+                //t.Option("", string.Empty);
+                foreach (var item in items)
+                {
+                    var htmlTag = t.Option(displaySelector(item), valueSelector(item));
+                    if (item.Equals(selectedItem) == false) continue;
+                    htmlTag.Attr("selected");
+                }
+                t.Id(expressionText);
+                t.Attr("name", expressionText);
+            });
+            select.AddClass("form-control");
+            return select;
+        }
+
         public static HtmlTag Validator<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
         {
             // MVC code don't ask me I just copied

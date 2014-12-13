@@ -28,6 +28,7 @@ namespace Rookian.TNL.Infrastructure.Bootstrapping
 
             container.RegisterFubuMvcTagHelpers();
             container.RegisterMvcIntegratedFilterProvider();
+            container.RegisterMediator();
             container.ConfigureDependencyResolver();
 
             return container;

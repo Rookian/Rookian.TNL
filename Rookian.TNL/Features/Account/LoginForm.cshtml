@@ -1,6 +1,7 @@
-﻿@using Rookian.TNL.Infrastructure.FubuMVCTagHelper
-@model Rookian.TNL.Features.Account.LoginForm
-    
+﻿@using Rookian.TNL.Features.Account
+@using Rookian.TNL.Infrastructure.FubuMVCTagHelper
+@model LoginForm
+
 <div class="panel panel-primary col-md-6">
     <div class="panel-body">
         <h2>Login</h2>
@@ -8,6 +9,8 @@
         {
             @Html.FormBlock(x => x.UserName)
             @Html.FormBlock(x => x.Password)
+            @Html.QueryDropDownFormBlock(x => x.DefaultSubsidiary, new SubsidiaryQuery { IsPublic = true }, d => d.Name, d => d.Id)
+            
             @Html.SubmitBlock()
         }
     </div>

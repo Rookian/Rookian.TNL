@@ -188,12 +188,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Features\Account\LoginForm.cs" />
+    <Compile Include="Features\Account\Subsidiary.cs" />
+    <Compile Include="Features\Account\SubsidiaryQuery.cs" />
+    <Compile Include="Features\Account\SubsidiaryQueryHandler.cs" />
     <Compile Include="Features\Home\IndexViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Bootstrapping\Bootstrapper.cs" />
     <Compile Include="Infrastructure\Bootstrapping\ContainerExtensions.cs" />
+    <Compile Include="Infrastructure\Extensions\LambdaExpressionExtensions.cs" />
     <Compile Include="Infrastructure\FubuMVCTagHelper\EnumDropDownModifier.cs" />
     <Compile Include="Infrastructure\FubuMVCTagHelper\FubuAspNetTagExtensions.cs" />
     <Compile Include="Infrastructure\Handler\Mediator.cs" />
