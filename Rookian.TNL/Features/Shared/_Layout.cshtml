@@ -1,16 +1,18 @@
-﻿@using System.Web.Optimization
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
     <head>
+        @Styles.Render("~/Content/css")
         <title>Rookian.TNL</title>
     </head>
     <body>
-        <div>
+        <div class="container">
             @RenderBody()
         </div>
-
+       
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", false)
     </body>
 </html>

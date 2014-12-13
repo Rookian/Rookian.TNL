@@ -13,6 +13,14 @@ namespace Rookian.TNL.Controllers
         [HttpPost]
         public ActionResult Login(LoginForm loginForm)
         {
+            if (ModelState.IsValid)
+            {
+                
+            }
+            else
+            {
+                
+            }
             return new EmptyResult();
         }
     }

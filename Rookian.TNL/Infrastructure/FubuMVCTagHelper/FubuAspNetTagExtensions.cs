@@ -15,32 +15,29 @@ namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
 {
     public static class FubuAspNetTagExtensions
     {
-        public static HtmlTag Link<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText)
-        where TController : Controller
+        public static HtmlTag Link<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText) where TController : Controller
         {
-           
             var url = LinkBuilder.BuildUrlFromExpression(helper.ViewContext.RequestContext, RouteTable.Routes, action);
             return new HtmlTag("a").Text(linkText).Attr("href", url);
         }
-        public static HtmlTag ButtonLink<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText)
-        where TController : Controller
+
+        public static HtmlTag ButtonLink<TController>(this HtmlHelper helper, Expression<Action<TController>> action, string linkText) where TController : Controller
         {
             return helper.Link(action, linkText).AddClass("btn");
         }
-        public static HtmlTag Input<T>(this HtmlHelper<T> helper,
-        Expression<Func<T, object>> expression)
-        where T : class
+
+        public static HtmlTag Input<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
         {
             var generator = GetGenerator(helper);
             return generator.InputFor(expression, model: helper.ViewData.Model);
         }
-        public static HtmlTag Display<T>(this HtmlHelper<T> helper,
-        Expression<Func<T, object>> expression)
-        where T : class
+
+        public static HtmlTag Display<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
         {
             var generator = GetGenerator<T>(helper);
             return generator.DisplayFor(expression, model: helper.ViewData.Model);
         }
+
         public static HtmlTag Label<T>(this HtmlHelper<T> helper,
         Expression<Func<T, object>> expression)
         where T : class

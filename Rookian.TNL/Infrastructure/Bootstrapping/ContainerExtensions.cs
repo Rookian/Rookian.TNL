@@ -41,7 +41,7 @@ namespace Rookian.TNL.Infrastructure.Bootstrapping
             container.RegisterPerWebRequest(() => HttpContext.Current.Request);
             container.RegisterPerWebRequest(() => HttpContext.Current);
             container.Register<ITypeResolverStrategy, TypeResolver.DefaultStrategy>();
-            container.Register<IElementNamingConvention, AspNetMvcElementNamingConvention>();
+            container.Register<IElementNamingConvention, DefaultElementNamingConvention>();
             container.RegisterOpenGeneric(typeof(ITagGenerator<>), typeof(TagGenerator<>));
             container.RegisterOpenGeneric(typeof(IElementGenerator<>), typeof(ElementGenerator<>));
 
