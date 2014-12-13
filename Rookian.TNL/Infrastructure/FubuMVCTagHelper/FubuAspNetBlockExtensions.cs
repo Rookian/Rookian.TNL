@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using FubuMVC.Core.UI;
 using HtmlTags;
-using HtmlTags.Extended.Attributes;
 using WebGrease.Css.Extensions;
 
 namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
 {
     public static class FubuAspNetBlockExtensions
     {
-        public static HtmlTag InputBlock<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression, Action<HtmlTag> inputModifier = null, Action<HtmlTag> validatorModifier = null)
-            where T : class
+        public static HtmlTag InputBlock<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression, Action<HtmlTag> inputModifier = null) where T : class
         {
             inputModifier = inputModifier ?? (_ => { });
-            validatorModifier = validatorModifier ?? (_ => { });
+
             var inputTag = helper.Input(expression);
             inputModifier(inputTag);
-            var validatorTag = helper.Validator(expression);
-            validatorModifier(validatorTag);
+          
 
             var name = ExpressionHelper.GetExpressionText(expression);
             var fullHtmlFieldName = helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
@@ -29,25 +27,28 @@ namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
 
             var attributes = helper.GetUnobtrusiveValidationAttributes(name);
             attributes.ForEach(x => inputTag.Attr(x.Key, x.Value) );
-            
-            inputTag.Append(validatorTag);
+
             return inputTag;
         }
-        public static HtmlTag FormBlock<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression, Action<HtmlTag> labelModifier = null, Action<HtmlTag> inputBlockModifier = null, Action<HtmlTag> inputModifier = null, Action<HtmlTag> validatorModifier = null)
-            where T : class
+        
+        public static HtmlTag FormBlock<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression, Action<HtmlTag> labelModifier = null, Action<HtmlTag> inputBlockModifier = null, Action<HtmlTag> inputModifier = null) where T : class
         {
             labelModifier = labelModifier ?? (_ => { });
             inputBlockModifier = inputBlockModifier ?? (_ => { });
+
             var divTag = new HtmlTag("div");
             divTag.AddClass("form-group");
             var labelTag = helper.Label(expression);
 
             labelModifier(labelTag);
-            var inputBlockTag = helper.InputBlock(expression, inputModifier, validatorModifier);
+            var inputBlockTag = helper.InputBlock(expression, inputModifier);
+
+            var validatorTag = helper.ValidationMessageFor(expression);
 
             inputBlockModifier(inputBlockTag);
             divTag.Append(labelTag);
             divTag.Append(inputBlockTag);
+            divTag.AppendHtml(validatorTag.ToHtmlString());
 
             return divTag;
         }

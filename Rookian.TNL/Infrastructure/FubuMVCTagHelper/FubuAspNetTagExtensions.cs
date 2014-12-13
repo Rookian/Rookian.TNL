@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using System.Web.UI.HtmlControls;
 using FubuCore.Reflection;
 using FubuMVC.Core.UI.Elements;
 using HtmlTags;
@@ -34,13 +33,11 @@ namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
 
         public static HtmlTag Display<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
         {
-            var generator = GetGenerator<T>(helper);
+            var generator = GetGenerator(helper);
             return generator.DisplayFor(expression, model: helper.ViewData.Model);
         }
 
-        public static HtmlTag Label<T>(this HtmlHelper<T> helper,
-        Expression<Func<T, object>> expression)
-        where T : class
+        public static HtmlTag Label<T>(this HtmlHelper<T> helper, Expression<Func<T, object>> expression) where T : class
         {
             var generator = GetGenerator<T>(helper);
             return generator.LabelFor(expression, model: helper.ViewData.Model);
@@ -95,19 +92,21 @@ namespace Rookian.TNL.Infrastructure.FubuMVCTagHelper
             tag.Text(error.ErrorMessage);
             return tag;
         }
+
         public static HtmlTag Submit(this HtmlHelper helper, string text = "Submit")
         {
             return new HtmlTag("input").Attr("type", "submit").Attr("value", text).AddClasses("btn", "btn-primary");
         }
+
         public static MvcHtmlString ValidationErrorsSummary(this HtmlHelper helper, string message = "")
         {
             return helper.ValidationSummary(message, new { @class = "text-danger" });
         }
+
         private static IElementGenerator<T> GetGenerator<T>(HtmlHelper<T> helper) where T : class
         {
             var generator = DependencyResolver.Current.GetService<IElementGenerator<T>>();
-            generator.Model = (helper.ViewData.Model);
-            //var generator = DependencyResolver.Current.GetService<IElementGenerator<T>>();
+            generator.Model = helper.ViewData.Model;
             return generator;
         }
     }

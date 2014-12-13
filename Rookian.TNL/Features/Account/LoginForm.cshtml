@@ -1,15 +1,14 @@
 ﻿@using Rookian.TNL.Infrastructure.FubuMVCTagHelper
 @model Rookian.TNL.Features.Account.LoginForm
-
-<div style="margin-top: 100px;padding: 10px; border-color: #ddd; 
-     border-style: solid; border-radius: 4px 4px 0 0; border-width: 1px;" 
-     class="col-md-6">
     
-    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
-    {
-        @Html.FormBlock(x => x.UserName)
-        @Html.FormBlock(x => x.Password)
-
-        @Html.SubmitBlock()
-    }
-</div>           
+<div class="panel panel-primary col-md-6">
+    <div class="panel-body">
+        <h2>Login</h2>
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.FormBlock(x => x.UserName)
+            @Html.FormBlock(x => x.Password)
+            @Html.SubmitBlock()
+        }
+    </div>
+</div>
